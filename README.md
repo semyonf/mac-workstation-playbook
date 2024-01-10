@@ -14,7 +14,7 @@
 </kbd>
 </p>
 
-> **Warning**  
+> [!WARNING]  
 > Don't forget to disable "Remote Login" on the managed nodes when you're done (unless you want it)
 
 ## On the control node
