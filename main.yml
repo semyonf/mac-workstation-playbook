@@ -1,0 +1,152 @@
+---
+- hosts: all
+  gather_facts: false
+  tasks:
+    - name: Install CLT if required
+      ansible.builtin.script: install_clt.sh
+      changed_when: false
+
+- hosts: all
+  roles:
+    - geerlingguy.mac.homebrew
+
+- hosts: all
+  tasks:
+    - name: brew paths.d
+      become: yes
+      ansible.builtin.copy:
+        dest: /etc/paths.d/brew
+        content: /opt/homebrew/bin
+        owner: root
+        group: wheel
+        mode: 0644
+
+    - name: Tap cask-versions
+      community.general.homebrew_tap:
+        name: homebrew/cask-versions
+
+    - name: install brew packages
+      community.general.homebrew:
+        update_homebrew: true
+        formula:
+          - node@18
+          - htop
+          - tree
+          - tmux
+          - redis
+          - libpq
+          - ansible
+          - bat
+          - mas
+
+    - name: Install Webstorm
+      community.general.homebrew_cask:
+        name: webstorm
+        state: present
+
+    - name: Install GitUp
+      community.general.homebrew_cask:
+        name: gitup
+        state: present
+
+    - name: Install Battery
+      community.general.homebrew_cask:
+        name: battery
+        state: present
+
+    - name: Install Chrome
+      community.general.homebrew_cask:
+        name: google-chrome
+        state: present
+
+#    todo doesn't work
+#    - name: Install OpenVPN
+#      community.general.homebrew_cask:
+#        name: openvpn-connect
+#        state: present
+
+    - name: Install Postgres app
+      community.general.homebrew_cask:
+        name: postgres-unofficial
+        state: present
+
+#    - name: Install Zoom
+#      community.general.homebrew_cask:
+#        name: zoom
+#        state: present
+
+    - name: Install Blender
+      community.general.homebrew_cask:
+        name: blender
+        state: present
+
+    - name: Install Maccy
+      community.general.homebrew_cask:
+        name: maccy
+        state: present
+
+    - name: Install MonitorControl
+      community.general.homebrew_cask:
+        name: monitorcontrol
+        state: present
+
+    - name: Install Tor Browser
+      community.general.homebrew_cask:
+        name: tor-browser
+        state: present
+
+#    # todo UTM is probably better
+#    - name: Install Parallels 18
+#      community.general.homebrew_cask:
+#        name: homebrew/cask-versions/parallels18
+#        state: present
+
+    - name: Install Mac App Store applications
+      community.general.mas:
+        state: present
+        id:
+          - 409183694  # Keynote
+          - 2121813704 # CleanMyKeyboard
+          - 2139691919 # Dipper
+          - 1401007562 # Type to learn
+          - 441258766  # Magnet
+          - 411643860  # DaisyDisk
+
+    # todo refactor
+    - name: node paths.d
+      become: yes
+      ansible.builtin.copy:
+        dest: /etc/paths.d/node
+        content: /opt/homebrew/opt/node@18/bin
+        owner: root
+        group: wheel
+        mode: 0644
+
+    - name: libpq paths.d
+      become: yes
+      ansible.builtin.copy:
+        dest: /etc/paths.d/libpq
+        content: /opt/homebrew/opt/libpq/bin
+        owner: root
+        group: wheel
+        mode: 0644
+
+    - name: OhMyZsh
+      ansible.builtin.git:
+        repo: 'https://github.com/ohmyzsh/ohmyzsh.git'
+        depth: 1
+        dest: /Users/Shared/.oh-my-zsh
+
+    - name: .zshrc
+      ansible.builtin.copy:
+        src: zshrc.sh
+        dest: /Users/{{ ansible_user }}/.zshrc
+        owner: "{{ ansible_user }}"
+        group: staff
+        mode: 0640
+
+    - name: Configure Defaults
+      ansible.builtin.script: defaults.sh
+      changed_when: false
+
+# todo ansible.builtin.reboot
