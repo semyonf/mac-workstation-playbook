@@ -8,7 +8,11 @@
   - enable "Remote Login" (or run `sudo systemsetup -setremotelogin on`)
   - notice "Local hostname" at the bottom, you can use it if the control node is on the same network
 
-![System Settings — Sharing window](https://github.com/semyonf/mac-workstation-playbook/blob/master/.readme/sharing.png)
+<p align="center">
+  <kbd>
+  <img alt="System Settings — Sharing window" src="https://github.com/semyonf/mac-workstation-playbook/blob/master/.readme/sharing.png" height="350">
+</kbd>
+</p>
 
 > **Warning**  
 > Don't forget to disable "Remote Login" on the managed nodes when you're done (unless you want it)
