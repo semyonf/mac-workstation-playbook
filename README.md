@@ -1,16 +1,23 @@
-### On the managed nodes
+**_This Ansible playbook is neither flexible nor universal, it is a rigid and opinionated config that I myself use to provision my Mac_**
+
+---
+
+## On the managed nodes (if there are any)
+- Sign in to iCloud & App Store
 - Open "System Settings" — "Sharing"
   - enable "Remote Login" (or run `sudo systemsetup -setremotelogin on`)
   - notice "Local hostname" at the bottom, you can use it if the control node is on the same network
 
 ![System Settings — Sharing window](https://github.com/semyonf/mac-workstation-playbook/blob/master/.readme/sharing.png)
 
-### On the control node
+> **Warning**  
+> Don't forget to disable "Remote Login" on the managed nodes when you're done (unless you want it)
+
+## On the control node
+- Sign in to iCloud & App Store
 - Install Apple's Command Line Tools (`xcode-select --install`)
 - [Install Ansible](https://docs.ansible.com/ansible/latest/installation_guide/index.html), duh
 - `ssh-copy-id` to the managed nodes (or use password authentication)
-- Populate inventory file
+- Populate the [inventory](https://docs.ansible.com/ansible/latest/inventory_guide/intro_inventory.html) file
 - Run `ansible-galaxy install -r requirements.yml`
 - Run `ansible-playbook --ask-become-pass main.yml`
-
-> Don't forget to disable "Remote Login" on the managed nodes (unless you want it)
