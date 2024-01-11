@@ -10,11 +10,11 @@
 
 <p align="center">
   <kbd>
-  <img alt="System Settings — Sharing window" src="https://github.com/semyonf/mac-workstation-playbook/blob/master/.readme/sharing.png" height="350">
+  <img alt="System Settings — Sharing window" src="https://github.com/semyonf/mac-workstation-playbook/blob/master/.readme/sharing.png" height="400">
 </kbd>
 </p>
 
-> **Warning**  
+> [!WARNING]  
 > Don't forget to disable "Remote Login" on the managed nodes when you're done (unless you want it)
 
 ## On the control node
