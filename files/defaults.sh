@@ -43,3 +43,4 @@ defaults write com.apple.menuextra.clock DateFormat -string 'EEE MMM d HH:mm'
 defaults write com.apple.screencapture "type" -string "jpg"
 defaults write com.apple.screencapture disable-shadow -bool true
 defaults write com.apple.touchbar.agent PresentationModeGlobal -string "fullControlStrip"
+defaults write kCFPreferencesAnyApplication TSMLanguageIndicatorEnabled 0
