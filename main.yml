@@ -38,6 +38,7 @@
           - ansible
           - bat
           - mas
+          - graphviz
 
     - name: Install Webstorm
       community.general.homebrew_cask:
