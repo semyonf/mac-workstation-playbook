@@ -20,8 +20,8 @@
 ## On the control node
 - Sign in to iCloud & App Store
 - Install Apple's Command Line Tools (`xcode-select --install`)
-- [Install Ansible](https://docs.ansible.com/ansible/latest/installation_guide/index.html), duh
-- `ssh-copy-id` to the managed nodes (or use password authentication)
+- [Install Ansible](https://docs.ansible.com/ansible/latest/installation_guide/index.html), duh, `brew install ansible`
+- `ssh-copy-id` to the managed nodes (or use password authentication) if there are any
 - Populate the [inventory](https://docs.ansible.com/ansible/latest/inventory_guide/intro_inventory.html) file
 - Run `ansible-galaxy install -r requirements.yml`
 - Run `ansible-playbook --ask-become-pass main.yml`
