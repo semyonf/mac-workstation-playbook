@@ -29,21 +29,12 @@
       community.general.homebrew:
         update_homebrew: true
         formula:
-          - node@18
+          - node
           - htop
           - tree
           - tmux
-          - redis
-          - libpq
           - ansible
-          - bat
           - mas
-          - graphviz
-
-    - name: Install Webstorm
-      community.general.homebrew_cask:
-        name: webstorm
-        state: present
 
     - name: Install GitUp
       community.general.homebrew_cask:
@@ -53,32 +44,6 @@
     - name: Install Battery
       community.general.homebrew_cask:
         name: battery
-        state: present
-
-    - name: Install Chrome
-      community.general.homebrew_cask:
-        name: google-chrome
-        state: present
-
-#    todo doesn't work
-#    - name: Install OpenVPN
-#      community.general.homebrew_cask:
-#        name: openvpn-connect
-#        state: present
-
-    - name: Install Postgres app
-      community.general.homebrew_cask:
-        name: postgres-unofficial
-        state: present
-
-#    - name: Install Zoom
-#      community.general.homebrew_cask:
-#        name: zoom
-#        state: present
-
-    - name: Install Blender
-      community.general.homebrew_cask:
-        name: blender
         state: present
 
     - name: Install Maccy
@@ -91,46 +56,11 @@
         name: monitorcontrol
         state: present
 
-    - name: Install Tor Browser
-      community.general.homebrew_cask:
-        name: tor-browser
-        state: present
-
-#    # todo UTM is probably better
-#    - name: Install Parallels 18
-#      community.general.homebrew_cask:
-#        name: homebrew/cask-versions/parallels18
-#        state: present
-
     - name: Install Mac App Store applications
       community.general.mas:
         state: present
         id:
-          - 409183694  # Keynote
           - 2121813704 # CleanMyKeyboard
-          - 2139691919 # Dipper
-          - 1401007562 # Type to learn
-          - 441258766  # Magnet
-          - 411643860  # DaisyDisk
-
-    # todo refactor
-    - name: node paths.d
-      become: yes
-      ansible.builtin.copy:
-        dest: /etc/paths.d/node
-        content: /opt/homebrew/opt/node@18/bin
-        owner: root
-        group: wheel
-        mode: 0644
-
-    - name: libpq paths.d
-      become: yes
-      ansible.builtin.copy:
-        dest: /etc/paths.d/libpq
-        content: /opt/homebrew/opt/libpq/bin
-        owner: root
-        group: wheel
-        mode: 0644
 
     - name: OhMyZsh
       ansible.builtin.git:
@@ -149,5 +79,3 @@
     - name: Configure Defaults
       ansible.builtin.script: defaults.sh
       changed_when: false
-
-# todo ansible.builtin.reboot
